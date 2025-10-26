@@ -1,0 +1,41 @@
+type Plant {
+    id: ID!
+    name: String!
+    variety: String
+    plantingDate: String!
+    status: PlantStatus!
+    expectedHarvestDate: String
+    notes: String
+    createdAt: String!
+    updatedAt: String!
+}
+
+enum PlantStatus {
+    PLANNED
+    PLANTED
+    GROWING
+    HARVESTING
+    HARVESTED
+    DIED
+}
+
+input PlantInput {
+    name: String!
+    variety: String
+    plantingDate: String!
+    status: PlantStatus
+    expectedHarvestDate: String
+    notes: String
+}
+
+extend type Query {
+    plants: [Plant!]!
+    plant(id: ID!): Plant!
+    plantsByStatus(status: PlantStatus!): [Plant!]!
+}
+
+extend type Mutation {
+    createPlant(input: PlantInput!): Plant!
+    updatePlant(id: ID!, input: PlantInput!): Plant!
+    deletePlant(id: ID!): Boolean!
+}

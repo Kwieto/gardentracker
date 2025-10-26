@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:garden_tracker
+    driver-class-name: org.h2.Driver
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+  graphql:
+    graphiql:
+      enabled: true
