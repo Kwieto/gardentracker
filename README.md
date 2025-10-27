@@ -1,7 +1,7 @@
 # Garden Tracker
 ![Computer Garden](https://cdn.shopify.com/s/files/1/0156/0137/files/Recycled-Computer-Monitor-Garden.jpg?v=1488199327)
 
-For my personal development, I wanted to learn some a new stack:
+For my personal development, I wanted to learn a new stack:
 
 Backend:
 - Spring Boot (Already well known)
