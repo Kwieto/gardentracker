@@ -3,7 +3,6 @@
 import { useQuery } from '@apollo/client/react';
 import type { Plant } from './types';
 import { GET_PLANTS } from './queries';
-import BaseLayout from '../components/BaseLayout';
 
 export default function PlantsPage() {
   const { loading, error, data } = useQuery<{ plants: Plant[] }>(GET_PLANTS);
@@ -12,7 +11,7 @@ export default function PlantsPage() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <BaseLayout>
+    <div>
       <h1 className="text-3xl font-bold mb-6">My Plants</h1>
       <ul className="space-y-4">
         {data?.plants.map((plant) => (
@@ -23,6 +22,6 @@ export default function PlantsPage() {
           </li>
         ))}
       </ul>
-    </BaseLayout>
+    </div>
   );
 }
