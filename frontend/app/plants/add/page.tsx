@@ -7,6 +7,7 @@ import {useState} from 'react';
 import {CREATE_PLANT, GET_PLANTS} from '../queries';
 import Button from "@/app/components/shared/Button";
 import Input from "@/app/components/shared/Input";
+import Form from "next/form";
 
 export default function AddPlantPage() {
   const router = useRouter();
@@ -24,9 +25,7 @@ export default function AddPlantPage() {
     refetchQueries: [{query: GET_PLANTS}],
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     const result = await createPlant({
       variables: {
         input: {
@@ -45,7 +44,7 @@ export default function AddPlantPage() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Add Plant</h1>
-      <form className="w-full max-w-sm" onSubmit={handleSubmit}>
+      <Form action={handleSubmit}>
         <Input
           labelText="Name"
           value={formData.name}
@@ -64,7 +63,7 @@ export default function AddPlantPage() {
         />
         <Button>{loading ? 'Adding...' : 'Add Plant'}</Button>
         {error && <p className="text-red-600 mt-2">Error: {error.message}</p>}
-      </form>
+      </Form>
     </div>
   );
 }
