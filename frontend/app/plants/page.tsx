@@ -4,8 +4,10 @@ import {useQuery} from '@apollo/client/react';
 import type {Plant} from './types';
 import {GET_PLANTS} from './queries';
 import Table from "@/app/components/shared/Table";
+import {useRouter} from "next/navigation";
 
 export default function PlantsPage() {
+  const router = useRouter();
   const {loading, error, data} = useQuery<{ plants: Plant[] }>(GET_PLANTS);
 
   if (loading) return <p>Loading...</p>;
@@ -23,7 +25,16 @@ export default function PlantsPage() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">My Plants</h1>
-      <Table headers={["ID", "Name", "Variety", "Status", "Planting Date"]} data={plants}/>
+      <Table
+        headers={["ID", "Name", "Variety", "Status", "Planting Date"]}
+        data={plants}
+        actions={
+          {
+            name: "open",
+            action: () => router.push("/plants/")
+          }
+        }
+      />
     </div>
   );
 }
