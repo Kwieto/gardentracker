@@ -19,10 +19,12 @@ class PlantResolver(
         return plantService.getAllPlants()
     }
 
-    fun plant(@Argument id: Long): Plant {
+    @QueryMapping
+    fun plantById(@Argument id: Long): Plant {
         return plantService.getPlantById(id)
     }
 
+    @QueryMapping
     fun plantsByStatus(@Argument status: PlantStatus): List<Plant> {
         return plantService.getPlantsByStatus(status)
     }

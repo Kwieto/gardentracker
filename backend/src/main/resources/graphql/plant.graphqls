@@ -30,7 +30,7 @@ input PlantInput {
 
 extend type Query {
     plants: [Plant!]!
-    plant(id: ID!): Plant!
+    plantById(id: ID!): Plant!
     plantsByStatus(status: PlantStatus!): [Plant!]!
 }
 
