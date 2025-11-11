@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import Link from "next/link";
 
 // Note: Ideally this would take a () => {}, but this is fine for now
 type TableAction = {
@@ -44,9 +45,13 @@ const Table: React.FC<TableProps & { className?: string }> = ({headers, data, ac
           {actions.length > 0 && (
             <td key="actions" className="px-6 py-4 text-sm text-gray-700">
               {actions.map((action: TableAction) => (
-                <a className="p-1 text-blue-500 underline" key={"action-" + action.label} href={action.route.replace('{' + action.key + '}', String(row[action.key]))}>
+                <Link
+                  className="p-1 text-blue-500 underline"
+                  key={"action-" + action.label}
+                  href={action.route.replace('{' + action.key + '}', String(row[action.key]))}
+                >
                   {action.label}
-                </a>
+                </Link>
               ))}
             </td>
           )}
