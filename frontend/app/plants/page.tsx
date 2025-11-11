@@ -28,12 +28,13 @@ export default function PlantsPage() {
       <Table
         headers={["ID", "Name", "Variety", "Status", "Planting Date"]}
         data={plants}
-        actions={
-          {
-            name: "open",
-            action: () => router.push("/plants/")
+        actions={[
+          { 
+            key: "id",
+            label: "Open",
+            route: "/plants/{id}"
           }
-        }
+        ]}
       />
     </div>
   );

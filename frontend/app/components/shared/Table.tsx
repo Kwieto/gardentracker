@@ -1,16 +1,23 @@
 import React from "react";
 import clsx from "clsx";
 
+// Note: Ideally this would take a () => {}, but this is fine for now
+type TableAction = {
+  key: string,
+  label: string,
+  route: string
+};
+
 type TableProps = {
   headers: string[],
-  data: object[],
-  actions: ("edit" | "delete")[],
+  data: Record<string, unknown>[],
+  actions: TableAction[],
 }
 
 const Table: React.FC<TableProps & { className?: string }> = ({headers, data, actions, className}) => {
   const tableClass = clsx("w-full border-collapse border border-gray-200", className);
   const tableHeaderClass = "px-6 py-3 text-left text-sm font-semibold text-gray-900"
-
+  
   return (
     <table className={tableClass}>
       <thead className="bg-gray-100 border-b">
@@ -29,14 +36,20 @@ const Table: React.FC<TableProps & { className?: string }> = ({headers, data, ac
       {data.map((row, index) => (
         <tr key={index} className="hover:bg-gray-50">
           {Object.entries(row).map(([key, value]) => (
-            <td key={key} className="px-6 py-4 text-sm text-gray-700">
-              {value}
+            <td key={index + key} className="px-6 py-4 text-sm text-gray-700">
+              {String(value)}
             </td>
           ))}
 
-          {actions.values().map((value) => (
-            // wip
-          ))}
+          {actions.length > 0 && (
+            <td key="actions" className="px-6 py-4 text-sm text-gray-700">
+              {actions.map((action: TableAction) => (
+                <a className="p-1 text-blue-500 underline" key={"action-" + action.label} href={action.route.replace('{' + action.key + '}', String(row[action.key]))}>
+                  {action.label}
+                </a>
+              ))}
+            </td>
+          )}
         </tr>
       ))}
       </tbody>
