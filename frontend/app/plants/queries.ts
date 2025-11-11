@@ -12,6 +12,18 @@ export const GET_PLANTS = gql`
   }
 `;
 
+export const GET_PLANT = gql`
+  query GetPlant($id: ID!) {
+    plantById(id: $id) {
+      id
+      name
+      variety
+      plantingDate
+      status
+    }
+  }
+`;
+
 export const CREATE_PLANT = gql`
   mutation CreatePlant($input: PlantInput!) {
     createPlant(input: $input) {
